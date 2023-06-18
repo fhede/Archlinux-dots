@@ -1,10 +1,10 @@
-#Keyboard
+# Keyboard
 loadkeys sv-latin1
 
-# Tesing efi
+# Testing efi
 ls /sys/firmware/efi/efivars
 
-#Network kolla med rfkill om blockerat
+# Network 
 ip link
 
 ping archlinux.org
@@ -13,6 +13,7 @@ timedatectl
 
 # Create the partitions in ubuntu live usb
 for better overview.
+
 # Mount partitions
 mount /dev/sda3 /mnt
 mkdir /mnt/home
@@ -24,7 +25,7 @@ swapon /dev/sda2
 # edit mirrorlist
 nano /etc/pacman.d/mirrorlist
 
-#
+# install base
 pacstrap -K /mnt base linux linux-firmware intel-ucode 
 
 # Into the abyss
@@ -51,7 +52,7 @@ echo MYHOSTNAME > /etc/hostname
 # nano /etc/hostname
 box
 
-#kernel config 
+# kernel config 
 mkinitcpio -P
 
 # set password
@@ -64,13 +65,13 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
 # Add user
-useradd -m -G wheel -s /bin/bash fred
-passwd fred
+useradd -m -G wheel -s /bin/bash username
+passwd username
 
 EDITOR=nano visudo
 # uncomment %wheel ALL=(ALL) ALL
 # without password
-fred  ALL=(ALL) NOPASSWD:ALL
+username  ALL=(ALL) NOPASSWD:ALL
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -91,6 +92,7 @@ pacman -S  plasma plasma-wayland-session kdeplasma-addons pipewire sddm-git sddm
 kde-applications bluez-utils blueman konsole plasma-nm mesa chromium
 ttf-jetbrains-mono-nerd noto-fonts-emoji
 
+# Breezetheme
 sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
 
 # Make /tmp a ramdisk (add the following line to /mnt/etc/fstab)
