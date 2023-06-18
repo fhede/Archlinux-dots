@@ -1,0 +1,100 @@
+#Keyboard
+loadkeys sv-latin1
+
+# Tesing efi
+ls /sys/firmware/efi/efivars
+
+#Network kolla med rfkill om blockerat
+ip link
+
+ping archlinux.org
+
+timedatectl
+
+# Create the partitions in ubuntu live usb
+for better overview.
+# Mount partitions
+mount /dev/sda3 /mnt
+mkdir /mnt/home
+mkdir -p /mnt/boot/efi
+mount /dev/sda4 /mnt/home
+mount /dev/sda1 /mnt/boot/efi
+swapon /dev/sda2
+
+# edit mirrorlist
+nano /etc/pacman.d/mirrorlist
+
+#
+pacstrap -K /mnt base linux linux-firmware intel-ucode 
+
+# Into the abyss
+arch-chroot /mnt
+# Add some useful sw
+pacman -S base-devel nano git grub efibootmgr networkmanager-qt sudo 
+
+# timezone
+ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
+
+# klockan
+hwclock --systohc
+
+# language
+locale-gen
+
+# nano /etc/locale.conf
+LANG=en_US.UTF-8
+
+# nano /etc/vconsole.conf
+KEYMAP=de-latin1
+
+echo MYHOSTNAME > /etc/hostname
+# nano /etc/hostname
+box
+
+#kernel config 
+mkinitcpio -P
+
+# set password
+passwd
+
+# Enable services
+# wait to enable to gitversion
+systemctl enable sddm.service
+
+systemctl enable NetworkManager.service
+
+# Add user
+useradd -m -G wheel -s /bin/bash fred
+passwd fred
+
+EDITOR=nano visudo
+# uncomment %wheel ALL=(ALL) ALL
+# without password
+fred  ALL=(ALL) NOPASSWD:ALL
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+Mkinitcpio:
+HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block ext4 filesystems fsck)
+MODULES="ahci usbhid xhci_hcd sd_mod pata_amd sata_nv ehci-hcd ohci-hcd ext4 vfat"
+BINARIES="fsck fsck.ext4"
+
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+
+yay -S microsoft-edge-stable-bin
+
+pacman -S  plasma plasma-wayland-session kdeplasma-addons pipewire sddm-git sddm-sugar-candy-git dolphin 
+kde-applications bluez-utils blueman konsole plasma-nm mesa chromium
+ttf-jetbrains-mono-nerd noto-fonts-emoji
+
+sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
+
+# Make /tmp a ramdisk (add the following line to /mnt/etc/fstab)
+# Change relatime on all non-boot partitions to noatime (reduces wear if using an SSD)
+tmpfs	/tmp	tmpfs	defaults,noatime,mode=1777	0	0
+
+
