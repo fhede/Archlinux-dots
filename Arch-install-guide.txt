@@ -29,6 +29,9 @@ nano /etc/pacman.d/mirrorlist
 # install base
 pacstrap -K /mnt base linux linux-firmware intel-ucode 
 
+# create fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
 # Into the abyss
 arch-chroot /mnt
 
