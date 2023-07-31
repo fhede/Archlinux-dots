@@ -92,10 +92,9 @@ git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 
-yay -S microsoft-edge-stable-bin
+pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez-utils blueman konsole plasma-nm mesa firefox
+ttf-liberation kate kio-admin
 
-pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez-utils blueman konsole plasma-nm mesa chromium
-ttf-jetbrains-mono-nerd noto-fonts-emoji
 
 # Breezetheme
 sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
