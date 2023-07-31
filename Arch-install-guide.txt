@@ -1,3 +1,7 @@
+# Create the partitions in ubuntu live usb or
+gparted live usb
+for better overview.
+
 # Keyboard
 loadkeys sv-latin1
 
@@ -10,9 +14,6 @@ ip link
 ping archlinux.org
 
 timedatectl
-
-# Create the partitions in ubuntu live usb
-for better overview.
 
 # Mount partitions
 mount /dev/sda3 /mnt
@@ -30,13 +31,14 @@ pacstrap -K /mnt base linux linux-firmware intel-ucode
 
 # Into the abyss
 arch-chroot /mnt
-# Add some useful sw
+
+# Add some useful tools
 pacman -S base-devel nano git grub efibootmgr networkmanager-qt sudo 
 
 # timezone
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 
-# klockan
+# hwclock
 hwclock --systohc
 
 # language
@@ -46,7 +48,7 @@ locale-gen
 LANG=en_US.UTF-8
 
 # nano /etc/vconsole.conf
-KEYMAP=de-latin1
+KEYMAP=sv-latin1
 
 echo MYHOSTNAME > /etc/hostname
 # nano /etc/hostname
@@ -59,7 +61,6 @@ mkinitcpio -P
 passwd
 
 # Enable services
-# wait to enable to gitversion
 systemctl enable sddm.service
 
 systemctl enable NetworkManager.service
@@ -78,7 +79,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 Mkinitcpio:
 HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block ext4 filesystems fsck)
-MODULES="ahci usbhid xhci_hcd sd_mod pata_amd sata_nv ehci-hcd ohci-hcd ext4 vfat"
+MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat"
 BINARIES="fsck fsck.ext4"
 
 pacman -S --needed git base-devel
@@ -88,15 +89,12 @@ makepkg -si
 
 yay -S microsoft-edge-stable-bin
 
-pacman -S  plasma plasma-wayland-session kdeplasma-addons pipewire sddm-git sddm-sugar-candy-git dolphin 
-kde-applications bluez-utils blueman konsole plasma-nm mesa chromium
+pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez-utils blueman konsole plasma-nm mesa chromium
 ttf-jetbrains-mono-nerd noto-fonts-emoji
 
 # Breezetheme
 sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
 
-# Make /tmp a ramdisk (add the following line to /mnt/etc/fstab)
-# Change relatime on all non-boot partitions to noatime (reduces wear if using an SSD)
-tmpfs	/tmp	tmpfs	defaults,noatime,mode=1777	0	0
+
 
 
