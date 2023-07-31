@@ -1,7 +1,7 @@
 # Create the partitions in gparted live usb.
 For better overview.
 (In gparted dont forget to change to gpt
-and also change bootflag to boot to get efi when finish)
+and also change/add bootflag to boot to get efi when finish)
 
 # Keyboard
 loadkeys sv-latin1
@@ -64,11 +64,6 @@ mkinitcpio -P
 # set password
 passwd
 
-# Enable services
-systemctl enable sddm.service
-
-systemctl enable NetworkManager.service
-
 # Add user
 useradd -m -G wheel -s /bin/bash username
 passwd username
@@ -92,12 +87,26 @@ git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 
+# Basic plasma desktop
 pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez-utils blueman konsole plasma-nm mesa firefox
 ttf-liberation kate kio-admin
 
-
 # Breezetheme
 sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
+
+# Dont forget to enable services
+systemctl enable sddm.service
+systemctl enable NetworkManager.service
+
+# Add to bashrc 
+alias clean='sudo pacman -Qttdq | sudo pacman -Rns -'
+alias upd='sudo pacman -Syu && yay -Syu --aur'
+alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias dm='sudo dmesg'
+alias ff='fastfetch'
+alias nft='sudo nft list ruleset'
+alias pkg='makepkg --config /etc/makepkg-clang.conf' ##add this-sric
+
 
 
 
