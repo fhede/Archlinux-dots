@@ -1,6 +1,7 @@
-# Create the partitions in ubuntu live usb or
-gparted live usb
-for better overview.
+# Create the partitions in gparted live usb.
+For better overview.
+(In gparted dont forget to change to gpt
+and also change bootflag to boot to get efi when finish)
 
 # Keyboard
 loadkeys sv-latin1
@@ -80,6 +81,7 @@ username  ALL=(ALL) NOPASSWD:ALL
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# nano etc/mkinitcpio.conf
 Mkinitcpio:
 HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block ext4 filesystems fsck)
 MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat"
