@@ -3,8 +3,6 @@ Custom kernel slimmed from modules with modprobed-db and compiled against intel 
 No support for kvm,zen,qemu,multimedia,amd
 Only support for intel nuc.
 
-:Testing
-
 Add CONFIG_PREEMPT_DYNAMIC: this in its current form adds the
 preempt=none/voluntary/full boot options (default: full),
 to allow distros to build a PREEMPT kernel but fall back to
