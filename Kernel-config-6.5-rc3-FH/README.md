@@ -9,6 +9,7 @@ to allow distros to build a PREEMPT kernel but fall back to
 close to PREEMPT_VOLUNTARY (or PREEMPT_NONE) runtime scheduling
 behavior via a boot time selection.
 
+:Testing
 grub_commandline preempt=full
 
 sudo dmesg | grep Preempt
