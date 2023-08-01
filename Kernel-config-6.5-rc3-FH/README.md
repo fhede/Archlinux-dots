@@ -16,4 +16,4 @@ Dynamic Preempt: voluntary
 rcu: Preemptible hierarchical RCU implementation.
 Dynamic Preempt: full
 
-system76-scheduler seems to enable same thing in the config
+system76-scheduler seems to enable the same thing in there config
