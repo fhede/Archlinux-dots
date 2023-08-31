@@ -1,4 +1,4 @@
-Custom kernel 6.5.0-linux-FH slimmed from modules with modprobed-db and compiled against intel nuc 13 1340P i5.
+Custom kernel 6.5.0-linux-FH trimmed from modules with modprobed-db and compiled against intel nuc 13 1340P i5.
 
 Working for kvm,qemu,multimedia,intel.
 Performance governor is set.
