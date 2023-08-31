@@ -89,11 +89,8 @@ cd yay-bin
 makepkg -si
 
 # Basic plasma desktop
-pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez-utils blueman konsole plasma-nm mesa firefox
+pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez bluez-utils bluedevil konsole plasma-nm mesa firefox
 ttf-liberation kate kio-admin
-
-# Breezetheme
-sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
 
 # Dont forget to enable services
 systemctl enable sddm.service
