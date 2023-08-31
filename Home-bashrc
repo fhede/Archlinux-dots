@@ -9,7 +9,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias clean='pacman -Qtdq | pacman -Rns -'
+alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias upd='sudo pacman -Syu && yay -Syu --aur'
 alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias dm='sudo dmesg'
