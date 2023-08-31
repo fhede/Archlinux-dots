@@ -78,7 +78,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # nano etc/mkinitcpio.conf
 Mkinitcpio:
-HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block ext4 filesystems fsck)
+HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block filesystems fsck)
 MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat"
 BINARIES="fsck fsck.ext4"
 
