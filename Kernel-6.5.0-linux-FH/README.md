@@ -19,6 +19,6 @@ Made for for intel nuc.
 With graysky patch(raptorlake) https://github.com/graysky2/kernel_compiler_patch compile times.
 real 4m50.813s user 56m28.817s sys 5m5.505s
 
-I also use system76cheduler from archlinux testing.
+I also use system76-cheduler from archlinux testing.
 
 Fastest kernel ever for me with no glitches and very high responsivness.
