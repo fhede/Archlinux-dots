@@ -1,3 +1,4 @@
+
 # Create the partitions in gparted live usb.
 For better overview.
 (In gparted dont forget to change to gpt
