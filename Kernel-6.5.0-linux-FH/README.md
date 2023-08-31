@@ -5,12 +5,12 @@ Performance governor is set.
 300 Hz timer x 16 cores
 
 Testing the preempt that opensuse use with very high responsivness.
-sudo dmesg | grep -i preempt
+sudo dmesg | grep -i preempt.
 
 Linux version 6.5.0-linux-FH (fred@nuc13) (gcc (GCC) 13.2.1 20230801, GNU ld (GNU Binutils) 2.41.0) #8 SMP PREEMPT_DYNAMIC Thu Aug 31 16:56:07 CEST 2023
 Dynamic Preempt: voluntary
 rcu: Preemptible hierarchical RCU implementation.
-Dynamic Preempt: full
+Dynamic Preempt: full.
 
 Made for for intel nuc.
 
