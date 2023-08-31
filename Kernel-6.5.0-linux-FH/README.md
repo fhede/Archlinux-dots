@@ -21,4 +21,4 @@ real 4m50.813s user 56m28.817s sys 5m5.505s
 
 I also use system76cheduler from archlinux testing.
 
-Fastest kernel ever for me with no glithces and very high responsivness.
+Fastest kernel ever for me with no glitches and very high responsivness.
