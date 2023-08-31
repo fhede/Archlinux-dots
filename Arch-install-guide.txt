@@ -3,6 +3,7 @@
 For better overview.
 (In gparted dont forget to change to gpt
 and also change/add bootflag to boot to get efi when finish)
+(why gparted live?? faster and easier for me.
 
 # Keyboard
 loadkeys sv-latin1
