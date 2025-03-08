@@ -1,112 +1,164 @@
-One hour archlinux install
+To all new installers. Read the wiki under installation
+and have a phone and take pictuers of problems and google them.
 
+One hour archlinux installation 2025
+
+---------------------------------------------------------------------
 # Create the partitions in gparted live usb.
 For better overview.
 (In gparted dont forget to change to gpt
 and also change/add bootflag to boot to get efi when finish)
 (why gparted live?? faster and easier for me.
 
+nvme0n1     259:0    0 931.5G  0 disk 
+├─nvme0n1p1 259:1    0     1G  0 part /boot/efi   
+├─nvme0n1p2 259:2    0  87.9G  0 part /           
+└─nvme0n1p3 259:3    0 842.6G  0 part /home
+
+---------------------------------------------------------------------
 # Keyboard
 loadkeys sv-latin1
 
+---------------------------------------------------------------------
 # Testing efi
 ls /sys/firmware/efi/efivars
 
+---------------------------------------------------------------------
 # Network 
-ip link
+ip link 
 
+---------------------------------------------------------------------
 ping archlinux.org
 
+---------------------------------------------------------------------
 timedatectl
 
+---------------------------------------------------------------------
 # Mount partitions
 # lsblk
-mount /dev/sda3 /mnt
+mount /dev/nvme0n1p2 /mnt
+
 mkdir /mnt/home
 mkdir -p /mnt/boot/efi
-mount /dev/sda4 /mnt/home
-mount /dev/sda1 /mnt/boot/efi
-swapon /dev/sda2
 
+mount /dev/ nvme0n1p3 /mnt/home
+mount /dev/nvme0n1p1 /mnt/boot/efi
+
+---------------------------------------------------------------------
 # edit mirrorlist
 nano /etc/pacman.d/mirrorlist
+## Sweden
+Server = http://mirror.accum.se/mirror/archlinux/$repo/os/$arch
+
+---------------------------------------------------------------------
 
 # install base
 pacstrap -K /mnt base linux linux-firmware intel-ucode 
 
+---------------------------------------------------------------------
 # create fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
+---------------------------------------------------------------------
 # Into the abyss
 arch-chroot /mnt
 
+---------------------------------------------------------------------
 # Add some useful tools
-pacman -S base-devel nano git grub efibootmgr networkmanager-qt sudo 
+pacman -S base-devel nano git grub efibootmgr networkmanager sudo 
 
+---------------------------------------------------------------------
 # timezone
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 
+---------------------------------------------------------------------
 # hwclock
 hwclock --systohc
 
+---------------------------------------------------------------------
 # language
 locale-gen
 
+---------------------------------------------------------------------
 # nano /etc/locale.conf
 LANG=en_US.UTF-8
 
+---------------------------------------------------------------------
 # nano /etc/vconsole.conf
 KEYMAP=sv-latin1
 
+---------------------------------------------------------------------
 echo MYHOSTNAME > /etc/hostname
 # nano /etc/hostname
 box
-
+---------------------------------------------------------------------
 # kernel config 
 mkinitcpio -P
 
+---------------------------------------------------------------------
 # set password
 passwd
 
+---------------------------------------------------------------------
 # Add user
 useradd -m -G wheel -s /bin/bash username
 passwd username
 
+---------------------------------------------------------------------
 EDITOR=nano visudo
 # uncomment %wheel ALL=(ALL) ALL
-# without password
-username  ALL=(ALL) NOPASSWD:ALL
 
+---------------------------------------------------------------------
+# without password
+EDITOR=nano visudo
+username  ALL=(ALL) NOPASSWD:ALL 
+
+------------------------------------------------------------------------------------
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
+------------------------------------------------------------------------------------
 # nano etc/mkinitcpio.conf
 Mkinitcpio:
 HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block filesystems fsck)
-MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat"
+MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat xfs"
 BINARIES="fsck fsck.ext4"
 
+-------------------------------------------------------------------------------------
 pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 
+----------------------------------------------------------------------------------------------------------------------
 # Basic plasma desktop
-pacman -S  plasma-desktop plasma-wayland-session pipewire sddm dolphin bluez bluez-utils bluedevil konsole plasma-nm mesa firefox
-ttf-liberation kate kio-admin
+pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal mesa firefox fastfech inxi
+font= default
 
+----------------------------------------------------------------------------------------------------------------------
 # Dont forget to enable services
-systemctl enable sddm.service
+systemctl enable gdm.service
 systemctl enable NetworkManager.service
 
-# Add to bashrc 
-alias clean='sudo pacman -Qttdq | sudo pacman -Rns -'
-alias upd='sudo pacman -Syu && yay -Syu --aur'
+-------------------------------------------------------------
+# And one extra just before reboot
+mkinitcpio -P
+grub-mkconfig -o /boot/grub/grub.cfg
+
+-------------------------------------------------------------
+# Add to bashrc after installation
+alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias dm='sudo dmesg'
 alias ff='fastfetch'
-alias nft='sudo nft list ruleset'
-alias pkg='makepkg --config /etc/makepkg-clang.conf' ##add this-sric
+alias dm='sudo dmesg'
+alias upd='sudo pacman -Syu && yay -Syu --aur'
+alias uuid='sudo blkid' --->>> get uuid
+alias fx='inxi -Fx -c 26'
+alias ctl='systemctl --state=failed'
+alias ip='sudo iptables -L -v -t filter' --->>> check ufw
+
+-------------------------------------------------------------
+
 
 
 
