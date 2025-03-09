@@ -121,7 +121,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # nano etc/mkinitcpio.conf
 Mkinitcpio:
 HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block filesystems fsck)
-MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat xfs"
+MODULES="i915 ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat xfs"
 BINARIES="fsck fsck.ext4"
 
 -------------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ makepkg -si
 
 ----------------------------------------------------------------------------------------------------------------------
 # Basic plasma desktop
-pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal mesa firefox fastfech inxi
+pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal gnome-text-editor powerline mesa firefox fastfech inxi
 font= default
 
 ----------------------------------------------------------------------------------------------------------------------
