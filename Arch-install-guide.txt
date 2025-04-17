@@ -10,6 +10,8 @@ For better overview.
 and also change/add bootflag to boot to get efi when finish)
 (why gparted live?? faster and easier for me.
 
+lsblk 
+
 nvme0n1     259:0    0 931.5G  0 disk 
 ├─nvme0n1p1 259:1    0     1G  0 part /boot/efi   
 ├─nvme0n1p2 259:2    0  87.9G  0 part /           
