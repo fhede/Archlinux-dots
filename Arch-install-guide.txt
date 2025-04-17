@@ -27,8 +27,13 @@ ls /sys/firmware/efi/efivars
 # Network 
 ip link 
 
----------------------------------------------------------------------
-ping archlinux.org
+ iwctl
+[iwd]# station wlan0 get-networks
+[iwd]# station wlan0 connect <Name of WiFi access point>
+[iwd]# exit
+
+$ ping 1.1.1.1   
+exit ctrl c
 
 ---------------------------------------------------------------------
 timedatectl
@@ -121,7 +126,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # nano etc/mkinitcpio.conf
 Mkinitcpio:
 HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block filesystems fsck)
-MODULES="i915 ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat xfs"
+MODULES="ahci usbhid xhci_hcd sd_mod ehci-hcd ohci-hcd ext4 vfat"
 BINARIES="fsck fsck.ext4"
 
 -------------------------------------------------------------------------------------
@@ -132,7 +137,7 @@ makepkg -si
 
 ----------------------------------------------------------------------------------------------------------------------
 # Basic plasma desktop
-pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal gnome-text-editor powerline mesa firefox fastfech inxi
+pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal gnome-text-editor  mesa firefox fastfech inxi
 font= default
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -146,9 +151,10 @@ mkinitcpio -P
 grub-mkconfig -o /boot/grub/grub.cfg
 
 -------------------------------------------------------------
-# Add to bashrc after installation
+# Add to .bashrc in /home after installation press ctrl h
+
 alias clean='pacman -Qtdq | sudo pacman -Rns -'
-alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg' 
 alias ff='fastfetch'
 alias dm='sudo dmesg'
 alias upd='sudo pacman -Syu && yay -Syu --aur'
