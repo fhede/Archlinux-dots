@@ -15,6 +15,9 @@ nvme0n1     259:0    0 931.5G  0 disk
 ├─nvme0n1p2 259:2    0  87.9G  0 part /           
 └─nvme0n1p3 259:3    0 842.6G  0 part /home
 
+vfat for boot 
+ext4 for / and /home
+
 ---------------------------------------------------------------------
 # Keyboard
 loadkeys sv-latin1
