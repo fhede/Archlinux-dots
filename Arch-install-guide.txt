@@ -98,7 +98,7 @@ echo MYHOSTNAME > /etc/hostname
 box
 ---------------------------------------------------------------------
 # kernel config 
-mkinitcpio -P
+mkinitcpio -P linux
 
 ---------------------------------------------------------------------
 # set password
@@ -147,7 +147,7 @@ systemctl enable NetworkManager.service
 
 -------------------------------------------------------------
 # And one extra just before reboot
-mkinitcpio -P
+mkinitcpio -P linux
 grub-mkconfig -o /boot/grub/grub.cfg
 
 -------------------------------------------------------------
