@@ -49,10 +49,10 @@ timedatectl set-ntp true
 mount /dev/nvme0n1p2 /mnt
 
 mkdir /mnt/home
-mkdir -p /mnt/boot/efi
+mkdir -p /mnt/boot
 
 mount /dev/ nvme0n1p3 /mnt/home
-mount /dev/nvme0n1p1 /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot
 
 ---------------------------------------------------------------------
 # edit mirrorlist
@@ -180,6 +180,7 @@ Type the network passphrase for FRITZ!Box 7362 SL psk.
 Passphrase:
 
 -------------------------------------------------------------
+
 
 
 
