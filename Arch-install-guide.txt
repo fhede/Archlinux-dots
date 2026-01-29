@@ -41,7 +41,7 @@ $ ping 1.1.1.1
 exit ctrl c
 
 ---------------------------------------------------------------------
-timedatectl
+timedatectl set-ntp true
 
 ---------------------------------------------------------------------
 # Mount partitions
@@ -180,6 +180,7 @@ Type the network passphrase for FRITZ!Box 7362 SL psk.
 Passphrase:
 
 -------------------------------------------------------------
+
 
 
 
