@@ -75,7 +75,7 @@ arch-chroot /mnt
 
 ---------------------------------------------------------------------
 # Add some useful tools
-pacman -S base-devel nano git grub efibootmgr networkmanager sudo 
+pacman -S base-devel nano git grub efibootmgr iwd dhcpcd sudo 
 
 ---------------------------------------------------------------------
 # timezone
@@ -148,7 +148,8 @@ font= default
 ----------------------------------------------------------------------------------------------------------------------
 # Dont forget to enable services
 systemctl enable gdm.service
-systemctl enable NetworkManager.service
+systemctl enable iwd.service 
+systemctl enable dhcpcd.service
 
 -------------------------------------------------------------
 # And one extra just before reboot
@@ -168,7 +169,18 @@ alias fx='inxi -Fx -c 26'
 alias ctl='systemctl --state=failed'
 alias ip='sudo iptables -L -v -t filter' --->>> check ufw
 
+install iwd
+iwctl
+
+# station wlan0 show
+# station wlan0 scan
+# station wlan0 get-networks
+# station wlan0 connect "FRITZ!Box 7362 SL"
+Type the network passphrase for FRITZ!Box 7362 SL psk.
+Passphrase:
+
 -------------------------------------------------------------
+
 
 
 
