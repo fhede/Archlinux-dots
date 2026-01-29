@@ -142,7 +142,7 @@ makepkg -si
 
 ----------------------------------------------------------------------------------------------------------------------
 # Basic plasma desktop
-pacman -S  gnome-desktop pipewire gdm nautlius bluez bluez-utils bluedevil gnome-terminal gnome-text-editor  mesa firefox fastfech inxi
+pacman -S plasma-desktop konsole kate dolphin pipewire bluez bluez-utils bluedevil mesa firefox fastfech inxi
 font= default
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -180,6 +180,7 @@ Type the network passphrase for FRITZ!Box 7362 SL psk.
 Passphrase:
 
 -------------------------------------------------------------
+
 
 
 
