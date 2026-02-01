@@ -1,0 +1,36 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export EDITOR=/usr/bin/nano
+
+
+
+
+
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='\[\033[38;2;143;240;164m\]\u\[\033[0m\]@\[\033[38;2;205;171;143m\]\h\[\033[0m\]:\[\033[38;2;205;214;244m\]\$ \[\033[0m\]'
+
+alias clean='pacman -Qdtq | sudo pacman -Rns -'
+alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias ff='fastfetch'
+alias dm='sudo dmesg'
+alias upd='sudo pacman -Syu && yay -Syu --aur'
+alias uuid='sudo blkid'
+alias fx='inxi -zv8'
+alias ctl='systemctl --state=failed'
+alias b='sudo journalctl -b'
+alias wx='wiremix'
+
+
+
+
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+##. /usr/share/powerline/bindings/bash/powerline.sh
